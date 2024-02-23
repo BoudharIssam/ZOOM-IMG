@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <title>IMAGE ZOOM</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+ 
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .title {
+      color: rgb(0, 0, 0);
+      font-size: 80px;
+      font-family: poppins, sans-serif;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+
+    img {
+      width: 700px;
+      height: 900px;
+      cursor: cell;
+      border-radius: 10px;
+      box-shadow: #6600ff 0px 20px 300px -10px;
+
+      /* variable */
+      --x: 50%;
+      --y: 50%;
+      transform: scale(var(--zoom));
+      transform-origin: var(--x) var(--y);
+      clip-path:
+        inset(calc((1 - 1/var(--zoom)) * (var(--y))) calc((1 - 1/var(--zoom)) * (100% - var(--x))) calc((1 - 1/var(--zoom)) * (100% - var(--y))) calc((1 - 1/var(--zoom)) * (var(--x))));
+    }
+
+    img:hover {
+      --zoom: 8;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="title">ib webwork 👋</h1>
+  <img class="img-zoom" src="/essets/charlie.jpg" alt="image ou est charlie">
+  <h2 class="title">img zoom 🔎</h2>
+</body>
+
+<script>
+  let img = document.querySelector(".img-zoom");
+
+  img.onmousemove = function (e) {
+    e.target.style.setProperty('--x', (100 * e.offsetX / e.target.offsetWidth) + '%');
+    e.target.style.setProperty('--y', (100 * e.offsetY / e.target.offsetHeight) + '%');
+  }
+</script>
+
+</html>
